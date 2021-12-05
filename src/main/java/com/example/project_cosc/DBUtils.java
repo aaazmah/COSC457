@@ -11,7 +11,7 @@ public class DBUtils {
         try{
             connection =
                     DriverManager.getConnection(
-                            "jdbc:mysql://localhost:3306/company", "root", "Kiidkaneki1@");
+                            "jdbc:mysql://localhost:3306/company", "root", "root");
 
 
         }catch(Exception e){
