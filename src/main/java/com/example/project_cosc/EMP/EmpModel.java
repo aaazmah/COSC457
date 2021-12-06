@@ -1,4 +1,4 @@
-package com.example.project_cosc;
+package com.example.project_cosc.EMP;
 
 public class EmpModel {
     String firstname, lastname, address, BDATE;

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_cosc.WAGE.WageController">
+    <Pane prefHeight="556.0" prefWidth="313.0" style="-fx-background-color: gray;">
+        <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_emp" prefHeight="28.0" prefWidth="59.0" text="Emp" />
+        <Button layoutX="62.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_vehicle" prefHeight="28.0" prefWidth="59.0" text="Veh" />
+        <Button layoutX="122.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_equipment" prefHeight="28.0" prefWidth="59.0" text="Equip" />
+        <Button layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_job" prefHeight="28.0" prefWidth="59.0" text="Jobs" />
+        <Button layoutX="243.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_emp" prefHeight="28.0" prefWidth="59.0" text="Wage" />
+        <TextField fx:id="field_hourlyRate" layoutX="19.0" layoutY="80.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_weeklyTotal" layoutX="19.0" layoutY="200.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_weeklyPay" layoutX="19.0" layoutY="253.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_ytd" layoutX="19.0" layoutY="320.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="54.0" text="Hourly Rate:" />
+        <Label layoutX="19.0" layoutY="114.0" text="Hourly Worked:" />
+        <Label layoutX="23.0" layoutY="174.0" text="Weekly Total:" />
+        <Label layoutX="20.0" layoutY="236.0" text="Weekly Pay" />
+        <Label layoutX="19.0" layoutY="296.0" text="Year to Date:" />
+        <TextField fx:id="field_id" layoutX="19.0" layoutY="380.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="355.0" text="ID:" />
+        <Button fx:id="field_addBtn" layoutX="19.0" layoutY="419.0" mnemonicParsing="false" onAction="#Add" prefHeight="26.0" prefWidth="59.0" text="Add" />
+        <Button fx:id="field_deleteBtn" layoutX="19.0" layoutY="514.0" mnemonicParsing="false" onAction="#Delete" prefHeight="28.0" prefWidth="59.0" text="Delete" />
+        <TextField fx:id="field_idDelete" layoutX="19.0" layoutY="482.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="460.0" text="ID:" />
+        <TextField fx:id="field_hourlyWorked" layoutX="19.0" layoutY="140.0" prefHeight="24.0" prefWidth="227.0" />
+        <Button fx:id="field_editBtn" layoutX="92.0" layoutY="419.0" mnemonicParsing="false" onAction="#Edit" prefHeight="26.0" prefWidth="59.0" text="Edit" />
+    </Pane>
+    <Pane prefHeight="650.0" prefWidth="687.0">
+        <TableView fx:id="table" layoutY="55.0" prefHeight="597.0" prefWidth="686.0">
+            <columns>
+                <TableColumn fx:id="col_rate" prefWidth="110.52267456054688" text="Hourly Rate" />
+                <TableColumn fx:id="col_worked" prefWidth="114.63546752929688" text="Hours Worked" />
+                <TableColumn fx:id="col_total" prefWidth="116.70257568359375" text="Weekly Total" />
+                <TableColumn fx:id="col_pay" prefWidth="130.11273193359375" text="Weekly Pay" />
+                <TableColumn fx:id="col_ytd" prefWidth="114.5" text="Year to Date" />
+            <TableColumn fx:id="col_id" prefWidth="97.0" text="Year to Date" />
+            </columns>
+        </TableView>
+        <Label layoutX="301.0" layoutY="-2.0" prefHeight="60.0" prefWidth="91.0" text="Wages">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+    </Pane>
+</HBox>

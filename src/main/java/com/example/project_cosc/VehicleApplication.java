@@ -10,10 +10,10 @@ import java.io.IOException;
 
 
 
-public class EmpApplication extends Application {
+public class VehicleApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(EmpApplication.class.getResource("Employees.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(VehicleApplication.class.getResource("Vehicle.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1000, 650);
         stage.setTitle("Company");
         stage.setScene(scene);

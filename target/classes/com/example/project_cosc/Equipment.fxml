@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.project_cosc.EQUIPMENT.EquipmentController">
+    <Pane prefHeight="556.0" prefWidth="313.0" style="-fx-background-color: gray;">
+        <Button layoutX="1.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_emp" prefHeight="28.0" prefWidth="59.0" text="Emp" />
+        <Button layoutX="62.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_vehicle" prefHeight="28.0" prefWidth="59.0" text="Veh" />
+        <Button layoutX="122.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_equipment" prefHeight="28.0" prefWidth="59.0" text="Equip" />
+        <Button layoutX="183.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_job" prefHeight="28.0" prefWidth="59.0" text="Jobs" />
+        <Button layoutX="243.0" layoutY="1.0" mnemonicParsing="false" onAction="#new_wage" prefHeight="28.0" prefWidth="59.0" text="Wage" />
+        <TextField fx:id="field_eModel" layoutX="19.0" layoutY="80.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_functional" layoutX="19.0" layoutY="320.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_year" layoutX="19.0" layoutY="200.0" prefHeight="24.0" prefWidth="227.0" />
+        <TextField fx:id="field_eBrand" layoutX="19.0" layoutY="140.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="54.0" text="Model" />
+        <Label layoutX="20.0" layoutY="236.0" text="Name" />
+        <Label layoutX="19.0" layoutY="296.0" text="Functional" />
+        <Label layoutX="19.0" layoutY="174.0" text="Year" />
+        <Label layoutX="19.0" layoutY="114.0" text="Brand" />
+        <TextField fx:id="field_fuel" layoutX="19.0" layoutY="380.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="355.0" text="Fuel Type:" />
+        <Button fx:id="field_addBtn" layoutX="19.0" layoutY="479.0" mnemonicParsing="false" onAction="#Add" prefHeight="26.0" prefWidth="59.0" text="Add" />
+        <Button fx:id="field_deleteBtn" layoutX="19.0" layoutY="595.0" mnemonicParsing="false" onAction="#Delete" prefHeight="28.0" prefWidth="59.0" text="Delete" />
+        <TextField fx:id="field_idDelete" layoutX="19.0" layoutY="556.0" prefHeight="24.0" prefWidth="227.0" />
+        <Label layoutX="19.0" layoutY="535.0" text="ID:" />
+        <TextField fx:id="field_name" layoutX="19.0" layoutY="253.0" prefHeight="24.0" prefWidth="227.0" />
+        <Button fx:id="field_editBtn" layoutX="93.0" layoutY="479.0" mnemonicParsing="false" onAction="#Edit" prefHeight="26.0" prefWidth="59.0" text="Edit" />
+      <Label layoutX="19.0" layoutY="420.0" text="Required:" />
+      <TextField fx:id="field_id" layoutX="165.0" layoutY="439.0" prefHeight="26.0" prefWidth="85.0" />
+      <Label layoutX="165.0" layoutY="420.0" text="ID:" />
+      <TextField fx:id="field_required" layoutX="19.0" layoutY="439.0" prefHeight="26.0" prefWidth="85.0" />
+    </Pane>
+    <Pane prefHeight="650.0" prefWidth="787.0">
+        <TableView fx:id="table" layoutY="55.0" prefHeight="597.0" prefWidth="788.0">
+            <columns>
+                <TableColumn fx:id="col_model" prefWidth="82.69015502929688" text="Model" />
+                <TableColumn fx:id="col_brand" prefWidth="102.25204467773438" text="Brand" />
+                <TableColumn fx:id="col_year" prefWidth="76.25100708007812" text="Year" />
+                <TableColumn fx:id="col_name" prefWidth="112.2490234375" text="Name" />
+                <TableColumn fx:id="col_functional" prefWidth="113.94671630859375" text="Functional" />
+                <TableColumn fx:id="col_fuel" minWidth="6.5" prefWidth="106.360107421875" text="Fuel Type" />
+            <TableColumn fx:id="col_required" minWidth="6.5" prefWidth="93.00091552734375" text="Required" />
+            <TableColumn fx:id="col_id" minWidth="6.5" prefWidth="99.50006103515625" text="ID" />
+            </columns>
+        </TableView>
+        <Label layoutX="337.0" layoutY="-3.0" prefHeight="60.0" prefWidth="142.0" text="Equipment">
+            <font>
+                <Font size="30.0" />
+            </font>
+        </Label>
+    </Pane>
+</HBox>

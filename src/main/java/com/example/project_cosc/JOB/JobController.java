@@ -1,21 +1,29 @@
 package com.example.project_cosc;
 
 
+import com.example.project_cosc.*;
+import com.example.project_cosc.EMP.EmpModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
-import java.util.Date;
 
 
-public class EmpController implements Initializable {
+public class JobController implements Initializable {
     @FXML
     public TableView<EmpModel> table;
     public TableColumn<EmpModel, String> col_fname;
@@ -24,7 +32,6 @@ public class EmpController implements Initializable {
     public TableColumn<EmpModel, String> col_dob;
     public TableColumn<EmpModel, Integer> col_wage;
     public TableColumn<EmpModel, Integer> col_ssn;
-
 
     @FXML
     public TextField field_firstname;
@@ -36,11 +43,9 @@ public class EmpController implements Initializable {
     public TextField field_ssnDelete;
 
 
-
     DBUtils connectNow = new DBUtils();
     Connection connection = connectNow.getConnection();
     PreparedStatement preparedStatement;
-
 
 
     @Override
@@ -182,7 +187,7 @@ public class EmpController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Employee SET firstname = ?, lastname = ?, address=?, BDATE =?, address =?, SSN = ? WHERE SSN = ?;";
+            String st = "UPDATE Employee SET firstname = ?, lastname = ?, address=?, BDATE =?, wage =?, SSN = ? WHERE SSN = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_firstname.getText());
             preparedStatement.setString(2, field_lastname.getText());
@@ -228,5 +233,74 @@ public class EmpController implements Initializable {
             e.printStackTrace();
         }
 
+    }
+
+    Stage stage;
+    @FXML
+    void new_emp(ActionEvent event) throws IOException {
+
+        Parent parent = FXMLLoader.load(EmpApplication.class.getResource("Employees.fxml"));
+
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Company");
+        stage.setScene(new Scene(parent));
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        stage.show();
+    }
+
+
+    @FXML
+    void new_equipment(ActionEvent event) throws IOException {
+
+        Parent parent = FXMLLoader.load(EquipmentApplication.class.getResource("Equipment.fxml"));
+
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Company");
+        stage.setScene(new Scene(parent));
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        stage.show();
+    }
+
+    @FXML
+    void new_vehicle(ActionEvent event) throws IOException {
+
+        Parent parent = FXMLLoader.load(VehicleApplication.class.getResource("Vehicle.fxml"));
+
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Company");
+        stage.setScene(new Scene(parent));
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        stage.show();
+    }
+
+
+
+    @FXML
+    void new_job(ActionEvent event) throws IOException {
+
+        Parent parent = FXMLLoader.load(JobApplication.class.getResource("Job.fxml"));
+
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Company");
+        stage.setScene(new Scene(parent));
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        stage.show();
+    }
+
+    @FXML
+    void new_wage(ActionEvent event) throws IOException {
+
+        Parent parent = FXMLLoader.load(WageApplication.class.getResource("Wage.fxml"));
+
+        stage = new Stage(StageStyle.DECORATED);
+        stage.setTitle("Company");
+        stage.setScene(new Scene(parent));
+        ((Node)(event.getSource())).getScene().getWindow().hide();
+
+        stage.show();
     }
 }
