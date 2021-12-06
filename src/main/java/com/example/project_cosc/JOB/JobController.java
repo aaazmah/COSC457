@@ -1,8 +1,8 @@
-package com.example.project_cosc;
+package com.example.project_cosc.JOB;
 
 
 import com.example.project_cosc.*;
-import com.example.project_cosc.EMP.EmpModel;
+import com.example.project_cosc.JOB.JobModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,22 +25,22 @@ import java.util.ResourceBundle;
 
 public class JobController implements Initializable {
     @FXML
-    public TableView<EmpModel> table;
-    public TableColumn<EmpModel, String> col_fname;
-    public TableColumn<EmpModel, String> col_lname;
-    public TableColumn<EmpModel, String> col_address;
-    public TableColumn<EmpModel, String> col_dob;
-    public TableColumn<EmpModel, Integer> col_wage;
-    public TableColumn<EmpModel, Integer> col_ssn;
+    public TableView<JobModel> table;
+    public TableColumn<JobModel, String> col_type;
+    public TableColumn<JobModel, String> col_address;
+    public TableColumn<JobModel, String> col_name;
+    public TableColumn<JobModel, String> col_amount;
+    public TableColumn<JobModel, String> col_form;
+    public TableColumn<JobModel, Integer> col_id;
 
     @FXML
-    public TextField field_firstname;
-    public TextField field_lastname;
+    public TextField field_job;
     public TextField field_address;
-    public TextField field_dob;
-    public TextField field_wage;
-    public TextField field_ssn;
-    public TextField field_ssnDelete;
+    public TextField field_name;
+    public TextField field_amount;
+    public TextField field_form;
+    public TextField field_id;
+    public TextField field_idDelete;
 
 
     DBUtils connectNow = new DBUtils();
@@ -56,34 +56,34 @@ public class JobController implements Initializable {
 
     public void fetchData(){
 
-        ObservableList<EmpModel> EmpModelObservableList = FXCollections.observableArrayList();
+        ObservableList<JobModel> JobModelObservableList = FXCollections.observableArrayList();
 
 
-        String query = "select firstname, lastname, address, BDATE, wage, SSN from employee order by firstname";
+        String query = "select jobtype, address, name, amount, formofpayment, id from job order by id";
 
         try{
             Statement statement = connection.createStatement();
             ResultSet qO = statement.executeQuery(query);
 
             while(qO.next()){
-                String queryfirstname = qO.getString("firstname");
-                String querylastname = qO.getString("lastname");
+                String queryjobtype = qO.getString("jobtype");
                 String queryaddress = qO.getString("address");
-                String queryBDATE = qO.getString("BDATE");
-                int querywage = qO.getInt("wage");
-                int querySSN = qO.getInt("SSN");
-                EmpModelObservableList.add(new EmpModel(queryfirstname,querylastname,queryaddress,queryBDATE,querySSN,  querywage));
+                String queryname = qO.getString("name");
+                String queryamount = qO.getString("amount");
+                String queryformofpayment = qO.getString("formofpayment");
+                int queryid = qO.getInt("id");
+                JobModelObservableList.add(new JobModel(queryjobtype,queryaddress,queryname,queryamount,queryformofpayment,queryid));
 
             }
 
-            col_fname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
-            col_lname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
+            col_type.setCellValueFactory(new PropertyValueFactory<>("jobtype"));
             col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
-            col_dob.setCellValueFactory(new PropertyValueFactory<>("BDATE"));
-            col_wage.setCellValueFactory(new PropertyValueFactory<>("wage"));
-            col_ssn.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            col_amount.setCellValueFactory(new PropertyValueFactory<>("amount"));
+            col_form.setCellValueFactory(new PropertyValueFactory<>("formofpayment"));
+            col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-            table.setItems(EmpModelObservableList);
+            table.setItems(JobModelObservableList);
 
 
         }catch(Exception e){
@@ -96,14 +96,14 @@ public class JobController implements Initializable {
     void Add(ActionEvent event){
 
         try {
-            String st = "INSERT INTO employee ( firstname, lastname, address, ssn, wage, BDATE) VALUES (?,?,?,?,?,?)";
+            String st = "INSERT INTO Job ( jobtype, address, name, amount, formofpayment, id) VALUES (?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setString(1, field_firstname.getText());
-            preparedStatement.setString(2, field_lastname.getText());
-            preparedStatement.setString(3, field_address.getText());
-            preparedStatement.setString(6, field_dob.getText());
-            preparedStatement.setInt(5, Integer.parseInt(field_wage.getText()));
-            preparedStatement.setInt(4, Integer.parseInt(field_ssn.getText()) );
+            preparedStatement.setString(1, field_job.getText());
+            preparedStatement.setString(2, field_address.getText());
+            preparedStatement.setString(3, field_name.getText());
+            preparedStatement.setString(4, field_amount.getText());
+            preparedStatement.setString(5, field_form.getText());
+            preparedStatement.setInt(6, Integer.parseInt(field_id.getText()) );
 
 
             int status = preparedStatement.executeUpdate();
@@ -113,23 +113,23 @@ public class JobController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was added!");
+                alert.setHeaderText("Job");
+                alert.setContentText("Job was added!");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
+                field_job.setText("");
                 field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_name.setText("");
+                field_amount.setText("");
+                field_form.setText("");
+                field_id.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Job");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }
@@ -145,10 +145,10 @@ public class JobController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Employee` WHERE `ssn` = ?";
+            String st = "DELETE FROM `Job` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setInt(1, Integer.parseInt(field_ssnDelete.getText()) );
+            preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
             int status = preparedStatement.executeUpdate();
 
 
@@ -156,23 +156,19 @@ public class JobController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was removed!");
+                alert.setHeaderText("Job");
+                alert.setContentText("Job was removed!");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
-                field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+
+                field_idDelete.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Job");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }
@@ -187,15 +183,15 @@ public class JobController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Employee SET firstname = ?, lastname = ?, address=?, BDATE =?, wage =?, SSN = ? WHERE SSN = ?;";
+            String st = "UPDATE Job SET jobtype = ?, address = ?, name=?, amount =?, formofpayment =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setString(1, field_firstname.getText());
-            preparedStatement.setString(2, field_lastname.getText());
-            preparedStatement.setString(3, field_address.getText());
-            preparedStatement.setString(4, field_dob.getText());
-            preparedStatement.setInt(5, Integer.parseInt(field_wage.getText()));
-            preparedStatement.setInt(6, Integer.parseInt(field_ssn.getText()) );
-            preparedStatement.setInt(7, Integer.parseInt(field_ssn.getText()) );
+            preparedStatement.setString(1, field_job.getText());
+            preparedStatement.setString(2, field_address.getText());
+            preparedStatement.setString(3, field_name.getText());
+            preparedStatement.setString(4, field_amount.getText());
+            preparedStatement.setString(5, field_form.getText());
+            preparedStatement.setInt(6, Integer.parseInt(field_id.getText()) );
+            preparedStatement.setInt(7, Integer.parseInt(field_id.getText()) );
 
 
 
@@ -206,23 +202,23 @@ public class JobController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was changed !");
+                alert.setHeaderText("Job");
+                alert.setContentText("Job was changed !");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
+                field_job.setText("");
                 field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_name.setText("");
+                field_amount.setText("");
+                field_form.setText("");
+                field_id.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Job");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }

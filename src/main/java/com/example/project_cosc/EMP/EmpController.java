@@ -160,12 +160,7 @@ public class EmpController implements Initializable {
                 alert.setContentText("Employee was removed!");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
-                field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_ssnDelete.setText("");
 
             }
             else

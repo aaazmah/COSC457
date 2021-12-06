@@ -21,4 +21,9 @@ module com.example.project_cosc {
     exports com.example.project_cosc.JOB;
     opens com.example.project_cosc.JOB to javafx.fxml;
 
+    exports com.example.project_cosc.LOGIN;
+    opens com.example.project_cosc.LOGIN to javafx.fxml;
+
+
+
 }

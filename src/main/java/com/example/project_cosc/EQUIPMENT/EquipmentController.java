@@ -171,14 +171,7 @@ public class EquipmentController implements Initializable {
                 alert.setContentText("Equipment was removed!");
                 alert.showAndWait();
                 fetchData();
-                field_eModel.setText("");
-                field_eBrand.setText("");
-                field_year.setText("");
-                field_name.setText("");
-                field_functional.setText("");
-                field_fuel.setText("");
-                field_required.setText("");
-                field_id.setText("");
+                field_idDelete.setText("");
 
             }
             else

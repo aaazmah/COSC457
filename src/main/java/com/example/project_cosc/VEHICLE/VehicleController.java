@@ -2,7 +2,7 @@ package com.example.project_cosc.VEHICLE;
 
 
 import com.example.project_cosc.*;
-import com.example.project_cosc.EMP.EmpModel;
+import com.example.project_cosc.VEHICLE.VehicleModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,22 +25,22 @@ import java.util.ResourceBundle;
 
 public class VehicleController implements Initializable {
     @FXML
-    public TableView<EmpModel> table;
-    public TableColumn<EmpModel, String> col_fname;
-    public TableColumn<EmpModel, String> col_lname;
-    public TableColumn<EmpModel, String> col_address;
-    public TableColumn<EmpModel, String> col_dob;
-    public TableColumn<EmpModel, Integer> col_wage;
-    public TableColumn<EmpModel, Integer> col_ssn;
+    public TableView<VehicleModel> table;
+    public TableColumn<VehicleModel, String> col_brand;
+    public TableColumn<VehicleModel, String> col_model;
+    public TableColumn<VehicleModel, String> col_fuel;
+    public TableColumn<VehicleModel, String> col_name;
+    public TableColumn<VehicleModel, String> col_func;
+    public TableColumn<VehicleModel, Integer> col_id;
 
     @FXML
-    public TextField field_firstname;
-    public TextField field_lastname;
-    public TextField field_address;
-    public TextField field_dob;
-    public TextField field_wage;
-    public TextField field_ssn;
-    public TextField field_ssnDelete;
+    public TextField field_brand;
+    public TextField field_model;
+    public TextField field_fuel;
+    public TextField field_name;
+    public TextField field_func;
+    public TextField field_id;
+    public TextField field_idDelete;
 
 
     DBUtils connectNow = new DBUtils();
@@ -56,34 +56,40 @@ public class VehicleController implements Initializable {
 
     public void fetchData(){
 
-        ObservableList<EmpModel> EmpModelObservableList = FXCollections.observableArrayList();
+        ObservableList<VehicleModel> VehicleModelObservableList = FXCollections.observableArrayList();
 
 
-        String query = "select firstname, lastname, address, BDATE, wage, SSN from employee order by firstname";
+        String query = "SELECT `Vehicle`.`brand`,\n" +
+                "    `Vehicle`.`model`,\n" +
+                "    `Vehicle`.`fueltype`,\n" +
+                "    `Vehicle`.`name`,\n" +
+                "    `Vehicle`.`functional`,\n" +
+                "    `Vehicle`.`id`\n" +
+                "FROM `company`.`Vehicle`";
 
         try{
             Statement statement = connection.createStatement();
             ResultSet qO = statement.executeQuery(query);
 
             while(qO.next()){
-                String queryfirstname = qO.getString("firstname");
-                String querylastname = qO.getString("lastname");
-                String queryaddress = qO.getString("address");
-                String queryBDATE = qO.getString("BDATE");
-                int querywage = qO.getInt("wage");
-                int querySSN = qO.getInt("SSN");
-                EmpModelObservableList.add(new EmpModel(queryfirstname,querylastname,queryaddress,queryBDATE,querySSN,  querywage));
+                String querybrand = qO.getString("brand");
+                String querymodel = qO.getString("model");
+                String queryfield_fuel = qO.getString("fueltype");
+                String queryname = qO.getString("name");
+                String queryfunctional = qO.getString("functional");
+                int queryid = qO.getInt("id");
+                VehicleModelObservableList.add(new VehicleModel(querybrand,querymodel,queryfield_fuel,queryname,queryfunctional,queryid));
 
             }
 
-            col_fname.setCellValueFactory(new PropertyValueFactory<>("firstname"));
-            col_lname.setCellValueFactory(new PropertyValueFactory<>("lastname"));
-            col_address.setCellValueFactory(new PropertyValueFactory<>("address"));
-            col_dob.setCellValueFactory(new PropertyValueFactory<>("BDATE"));
-            col_wage.setCellValueFactory(new PropertyValueFactory<>("wage"));
-            col_ssn.setCellValueFactory(new PropertyValueFactory<>("SSN"));
+            col_brand.setCellValueFactory(new PropertyValueFactory<>("brand"));
+            col_model.setCellValueFactory(new PropertyValueFactory<>("model"));
+            col_fuel.setCellValueFactory(new PropertyValueFactory<>("fueltype"));
+            col_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+            col_func.setCellValueFactory(new PropertyValueFactory<>("functional"));
+            col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
 
-            table.setItems(EmpModelObservableList);
+            table.setItems(VehicleModelObservableList);
 
 
         }catch(Exception e){
@@ -96,14 +102,14 @@ public class VehicleController implements Initializable {
     void Add(ActionEvent event){
 
         try {
-            String st = "INSERT INTO employee ( firstname, lastname, address, ssn, wage, BDATE) VALUES (?,?,?,?,?,?)";
+            String st = "INSERT INTO vehicle ( brand, model, fueltype, name, functional, id) VALUES (?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setString(1, field_firstname.getText());
-            preparedStatement.setString(2, field_lastname.getText());
-            preparedStatement.setString(3, field_address.getText());
-            preparedStatement.setString(6, field_dob.getText());
-            preparedStatement.setInt(5, Integer.parseInt(field_wage.getText()));
-            preparedStatement.setInt(4, Integer.parseInt(field_ssn.getText()) );
+            preparedStatement.setString(1, field_brand.getText());
+            preparedStatement.setString(2, field_model.getText());
+            preparedStatement.setString(3, field_fuel.getText());
+            preparedStatement.setString(4, field_name.getText());
+            preparedStatement.setString(5, field_func.getText());
+            preparedStatement.setInt(6, Integer.parseInt(field_id.getText()) );
 
 
             int status = preparedStatement.executeUpdate();
@@ -113,23 +119,23 @@ public class VehicleController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was added!");
+                alert.setHeaderText("Vehicle");
+                alert.setContentText("Vehicle was added!");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
-                field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_brand.setText("");
+                field_model.setText("");
+                field_fuel.setText("");
+                field_name.setText("");
+                field_func.setText("");
+                field_id.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Vehicle");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }
@@ -145,10 +151,10 @@ public class VehicleController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Employee` WHERE `ssn` = ?";
+            String st = "DELETE FROM `Vehicle` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setInt(1, Integer.parseInt(field_ssnDelete.getText()) );
+            preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
             int status = preparedStatement.executeUpdate();
 
 
@@ -156,23 +162,18 @@ public class VehicleController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was removed!");
+                alert.setHeaderText("Vehicle");
+                alert.setContentText("Vehicle was removed!");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
-                field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_idDelete.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Vehicle");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }
@@ -187,15 +188,15 @@ public class VehicleController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Employee SET firstname = ?, lastname = ?, address=?, BDATE =?, wage =?, SSN = ? WHERE SSN = ?;";
+            String st = "UPDATE Vehicle SET brand = ?, model = ?, fueltype=?, name =?, functional =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
-            preparedStatement.setString(1, field_firstname.getText());
-            preparedStatement.setString(2, field_lastname.getText());
-            preparedStatement.setString(3, field_address.getText());
-            preparedStatement.setString(4, field_dob.getText());
-            preparedStatement.setInt(5, Integer.parseInt(field_wage.getText()));
-            preparedStatement.setInt(6, Integer.parseInt(field_ssn.getText()) );
-            preparedStatement.setInt(7, Integer.parseInt(field_ssn.getText()) );
+            preparedStatement.setString(1, field_brand.getText());
+            preparedStatement.setString(2, field_model.getText());
+            preparedStatement.setString(3, field_fuel.getText());
+            preparedStatement.setString(4, field_name.getText());
+            preparedStatement.setString(5, field_func.getText());
+            preparedStatement.setInt(6, Integer.parseInt(field_id.getText()) );
+            preparedStatement.setInt(7, Integer.parseInt(field_id.getText()) );
 
 
 
@@ -206,23 +207,23 @@ public class VehicleController implements Initializable {
             {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Success");
-                alert.setHeaderText("Employee");
-                alert.setContentText("Employee was changed !");
+                alert.setHeaderText("Vehicle");
+                alert.setContentText("Vehicle was changed !");
                 alert.showAndWait();
                 fetchData();
-                field_firstname.setText("");
-                field_lastname.setText("");
-                field_address.setText("");
-                field_dob.setText("");
-                field_wage.setText("");
-                field_ssn.setText("");
+                field_brand.setText("");
+                field_model.setText("");
+                field_fuel.setText("");
+                field_name.setText("");
+                field_func.setText("");
+                field_id.setText("");
 
             }
             else
             {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Fail");
-                alert.setHeaderText("Employee");
+                alert.setHeaderText("Vehicle");
                 alert.setContentText("Something went wrong! Check again please");
                 alert.showAndWait();
             }
@@ -303,6 +304,4 @@ public class VehicleController implements Initializable {
 
         stage.show();
     }
-
 }
-

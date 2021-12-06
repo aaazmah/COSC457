@@ -159,12 +159,7 @@ public class WageController implements Initializable {
                 alert.setContentText("Wage was removed!");
                 alert.showAndWait();
                 fetchData();
-                field_hourlyRate.setText("");
-                field_hourlyWorked.setText("");
-                field_weeklyTotal.setText("");
-                field_weeklyPay.setText("");
-                field_ytd.setText("");
-                field_id.setText("");
+                field_idDelete.setText("");
 
             }
             else
