@@ -60,7 +60,7 @@ public class EquipmentController implements Initializable {
         ObservableList<EquipmentModel> EquipmentModelObservableList = FXCollections.observableArrayList();
 
 
-        String query = "select model, brand, year, name, functional, fueltype, required, id from Equipment order by id";
+        String query = "select model, brand, year, name, functional, fueltype, required, id from equipment order by id";
 
         try{
             Statement statement = connection.createStatement();
@@ -101,7 +101,7 @@ public class EquipmentController implements Initializable {
     void Add(ActionEvent event){
 
         try {
-            String st = "INSERT INTO Equipment ( model, brand, year, name, functional, fueltype,required, id) VALUES (?,?,?,?,?,?,?,?)";
+            String st = "INSERT INTO equipment ( model, brand, year, name, functional, fueltype,required, id) VALUES (?,?,?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_eModel.getText());
             preparedStatement.setString(2, field_eBrand.getText());
@@ -156,7 +156,7 @@ public class EquipmentController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Equipment` WHERE `id` = ?";
+            String st = "DELETE FROM `equipment` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
@@ -193,7 +193,7 @@ public class EquipmentController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Equipment SET model = ?, brand = ?, year=?, name =?, functional =?, fueltype = ?, required =?, id = ? WHERE id = ?;";
+            String st = "UPDATE equipment SET model = ?, brand = ?, year=?, name =?, functional =?, fueltype = ?, required =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_eModel.getText());
             preparedStatement.setString(2, field_eBrand.getText());

@@ -145,7 +145,7 @@ public class EmpController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Employee` WHERE `ssn` = ?";
+            String st = "DELETE FROM `employee` WHERE `ssn` = ?";
 
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_ssnDelete.getText()) );
@@ -182,7 +182,7 @@ public class EmpController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Employee SET firstname = ?, lastname = ?, address=?, BDATE =?, wage =?, SSN = ? WHERE SSN = ?;";
+            String st = "UPDATE employee SET firstname = ?, lastname = ?, address=?, BDATE =?, wage =?, SSN = ? WHERE SSN = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_firstname.getText());
             preparedStatement.setString(2, field_lastname.getText());

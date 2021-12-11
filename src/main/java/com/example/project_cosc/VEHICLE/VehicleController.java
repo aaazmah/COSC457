@@ -59,13 +59,13 @@ public class VehicleController implements Initializable {
         ObservableList<VehicleModel> VehicleModelObservableList = FXCollections.observableArrayList();
 
 
-        String query = "SELECT `Vehicle`.`brand`,\n" +
-                "    `Vehicle`.`model`,\n" +
-                "    `Vehicle`.`fueltype`,\n" +
-                "    `Vehicle`.`name`,\n" +
-                "    `Vehicle`.`functional`,\n" +
-                "    `Vehicle`.`id`\n" +
-                "FROM `company`.`Vehicle`";
+        String query = "SELECT `vehicle`.`brand`,\n" +
+                "    `vehicle`.`model`,\n" +
+                "    `vehicle`.`fueltype`,\n" +
+                "    `vehicle`.`name`,\n" +
+                "    `vehicle`.`functional`,\n" +
+                "    `vehicle`.`id`\n" +
+                "FROM `company`.`vehicle`";
 
         try{
             Statement statement = connection.createStatement();
@@ -151,7 +151,7 @@ public class VehicleController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Vehicle` WHERE `id` = ?";
+            String st = "DELETE FROM `vehicle` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
@@ -188,7 +188,7 @@ public class VehicleController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Vehicle SET brand = ?, model = ?, fueltype=?, name =?, functional =?, id = ? WHERE id = ?;";
+            String st = "UPDATE vehicle SET brand = ?, model = ?, fueltype=?, name =?, functional =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_brand.getText());
             preparedStatement.setString(2, field_model.getText());

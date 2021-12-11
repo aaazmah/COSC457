@@ -11,7 +11,7 @@ public class DBUtils {
         try{
             connection =
                     DriverManager.getConnection(
-                            "jdbc:mysql://localhost:3306/company", "root", "root");
+                            "jdbc:mysql://project.csrygf1sujxh.us-east-1.rds.amazonaws.com/company", "admin", "password");
 
 
         }catch(Exception e){

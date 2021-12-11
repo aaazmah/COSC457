@@ -96,7 +96,7 @@ public class JobController implements Initializable {
     void Add(ActionEvent event){
 
         try {
-            String st = "INSERT INTO Job ( jobtype, address, name, amount, formofpayment, id) VALUES (?,?,?,?,?,?)";
+            String st = "INSERT INTO job ( jobtype, address, name, amount, formofpayment, id) VALUES (?,?,?,?,?,?)";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_job.getText());
             preparedStatement.setString(2, field_address.getText());
@@ -145,7 +145,7 @@ public class JobController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Job` WHERE `id` = ?";
+            String st = "DELETE FROM `job` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
@@ -183,7 +183,7 @@ public class JobController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Job SET jobtype = ?, address = ?, name=?, amount =?, formofpayment =?, id = ? WHERE id = ?;";
+            String st = "UPDATE job SET jobtype = ?, address = ?, name=?, amount =?, formofpayment =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setString(1, field_job.getText());
             preparedStatement.setString(2, field_address.getText());

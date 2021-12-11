@@ -144,7 +144,7 @@ public class WageController implements Initializable {
     void Delete(ActionEvent event){
 
         try {
-            String st = "DELETE FROM `Wage` WHERE `id` = ?";
+            String st = "DELETE FROM `wage` WHERE `id` = ?";
 
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_idDelete.getText()) );
@@ -181,7 +181,7 @@ public class WageController implements Initializable {
     @FXML
     void Edit(ActionEvent event){
         try {
-            String st = "UPDATE Wage SET hourlyrate = ?, hoursworked = ?, weeklytotal=?, weeklypay =?, ytd =?, id = ? WHERE id = ?;";
+            String st = "UPDATE wage SET hourlyrate = ?, hoursworked = ?, weeklytotal=?, weeklypay =?, ytd =?, id = ? WHERE id = ?;";
             preparedStatement = connection.prepareStatement(st);
             preparedStatement.setInt(1, Integer.parseInt(field_hourlyRate.getText()));
             preparedStatement.setInt(2, Integer.parseInt(field_hourlyWorked.getText()));
